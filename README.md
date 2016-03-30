@@ -16,6 +16,9 @@ https://github.com/firebase/flashlight
 $ npm install -g ionic
 ```
 
+Update the controller with your own Firebase url,
+Add seed data to Firebase.
+
 Then run:
 
 ```bash
