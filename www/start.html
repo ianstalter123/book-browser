@@ -1,0 +1,29 @@
+ <ion-pane>
+
+ <div class="bar bar-header item-input-inset">
+  <label class="item-input-wrapper">
+    <i class="icon ion-ios-search placeholder-icon"></i>
+    <input my-enter="search()" ng-model="term" type="search" placeholder="Search">
+  </label>
+  <button ng-click="search()" class="button button-clear">
+    Search
+  </button>
+</div>
+
+<ion-content class="has-header">
+
+  <div class="row" ng-repeat="book in books track by $index">
+    <div class="col col-100">
+      <h2 style="text-align:center">{{book.title}}</h2>
+
+      <img  id="{{books[$index].$id}}"
+      ng-click="view(books[$index].$id)" ng-src="{{book.image}}" width="100%" />
+
+    </div>
+  </div>
+
+</ion-content>
+</ion-pane>
+<div class="bar bar-footer bar-balanced">
+
+</div>
