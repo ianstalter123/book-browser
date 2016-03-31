@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+p {
+  font-family: Tahoma;
+  font-size: 15pt;
+  color: #222;
+}
+
+.book {
+  background-color:#fff;
+  padding: 5%;
+  line-height: 150%;
+}

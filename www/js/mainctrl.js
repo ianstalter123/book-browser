@@ -1,7 +1,7 @@
 app.controller("mainCtrl", function($scope,$http,$firebaseArray,$state,$rootScope,$stateParams,$ionicLoading) {
   console.log("in the main controller");
-  var bookRef = new Firebase("https://myfirebase.firebaseio.com/library/");
-  var queue = new Firebase("https://myfirebas.firebaseio.com/search");
+  var bookRef = new Firebase("https://crackling-fire-8350.firebaseio.com/library/");
+  var queue = new Firebase("https://dev456.firebaseio.com/search");
 
   $ionicLoading.show({
     content: 'Loading',
@@ -11,13 +11,13 @@ app.controller("mainCtrl", function($scope,$http,$firebaseArray,$state,$rootScop
     showDelay: 0
   });
 
-  // bookRef.once("value", function(snapshot) {
- //  var a = snapshot.numChildren();
- //   console.log(a);
- //  // c === 0 (since "Fred" is a string)
- //  });
+  bookRef.once("value", function(snapshot) {
+  var a = snapshot.numChildren();
+   console.log(a);
+  // c === 0 (since "Fred" is a string)
+  });
 if(!$scope.books) {
-$scope.books = $firebaseArray(bookRef);
+  $scope.books = $firebaseArray(bookRef);
 }
 
 console.log($scope.books);
@@ -50,8 +50,8 @@ $scope.search = function() {
          });
      }
 
-    $scope.results = [];
-    searchES('firebase', 'book', {query_string: { query: '*' + $scope.term}}, function(data) {
+     $scope.results = [];
+     searchES('firebase', 'book', {query_string: { query: '*' + $scope.term}}, function(data) {
       console.log('searching');
       if( data.hits ) {
         console.log(data);
@@ -60,19 +60,19 @@ $scope.search = function() {
           $scope.results.push({$id: data.hits[i]._id, description: data.hits[i]._source.description, image: data.hits[i]._source.image, title: data.hits[i]._source.title})
         }
         $scope.books = "";
-         $scope.$apply(function () {
-             $scope.books = $scope.results;
-        });
+        $scope.$apply(function () {
+         $scope.books = $scope.results;
+       });
 
       }
 
       $scope.term = "";
     });
 
-  };
-$scope.term = "";
+   };
+   $scope.term = "";
 
-  $scope.view = function(id) {
+   $scope.view = function(id) {
     $state.go('show', { "id": id })
   }
 

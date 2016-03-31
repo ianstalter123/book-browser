@@ -12,7 +12,7 @@ var app = angular.module('starter', ['ionic','firebase','ngCordova'])
                 scope.$apply(function (){
                     scope.$eval(attrs.myEnter);
                     scope.term = "";
-                    $cordovaKeyboard.close()
+                    cordova.plugins.Keyboard.close();
                 });
 
                 event.preventDefault();
