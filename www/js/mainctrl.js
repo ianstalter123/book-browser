@@ -68,7 +68,7 @@ $scope.search = function() {
 
       }
 
-      $scope.term = "";
+      //$scope.term = "";
     });
 
    };
