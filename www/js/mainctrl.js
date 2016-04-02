@@ -1,6 +1,6 @@
-app.controller("mainCtrl", function($scope,$http,$firebaseArray,$state,$rootScope,$stateParams,$ionicLoading) {
+app.controller("mainCtrl", function($scope,$http,$firebaseArray,$state,$rootScope,$stateParams,$ionicLoading,$ionicViewSwitcher) {
   console.log("in the main controller");
-  var bookRef = new Firebase("https://crackling-fire-8350.firebaseio.com/library/");
+  var bookRef = new Firebase("https://dev456.firebaseio.com/books");
   var queue = new Firebase("https://dev456.firebaseio.com/search");
 
   $ionicLoading.show({
@@ -11,11 +11,11 @@ app.controller("mainCtrl", function($scope,$http,$firebaseArray,$state,$rootScop
     showDelay: 0
   });
 
-  bookRef.once("value", function(snapshot) {
-  var a = snapshot.numChildren();
-   console.log(a);
-  // c === 0 (since "Fred" is a string)
-  });
+  // bookRef.once("value", function(snapshot) {
+  // var a = snapshot.numChildren();
+  //  console.log(a);
+  // // c === 0 (since "Fred" is a string)
+  // });
 if(!$scope.books) {
   $scope.books = $firebaseArray(bookRef);
 }
@@ -54,12 +54,14 @@ $scope.search = function() {
      searchES('firebase', 'book', {query_string: { query: '*' + $scope.term}}, function(data) {
       console.log('searching');
       if( data.hits ) {
+        console.log('got data');
         console.log(data);
 
         for(var i=0; i<data.hits.length; i++) {
           $scope.results.push({$id: data.hits[i]._id, description: data.hits[i]._source.description, image: data.hits[i]._source.image, title: data.hits[i]._source.title})
         }
         $scope.books = "";
+
         $scope.$apply(function () {
          $scope.books = $scope.results;
        });
@@ -75,5 +77,10 @@ $scope.search = function() {
    $scope.view = function(id) {
     $state.go('show', { "id": id })
   }
+
+   $scope.swipeleftAction = function(id) {
+      $ionicViewSwitcher.nextDirection('forward');
+        $scope.view(id);
+    }
 
 })

@@ -17,7 +17,7 @@
       <h2 style="text-align:center">{{book.title}}</h2>
 
       <img  id="{{books[$index].$id}}"
-      ng-click="view(books[$index].$id)" ng-src="{{book.image}}" width="100%" />
+      ng-click="view(books[$index].$id)" on-swipe-left="swipeleftAction(books[$index].$id)" ng-src="{{book.image}}" width="100%" />
 
     </div>
   </div>
